@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lector",
+  "name": "Lector",
+  "description": "Lector book reading system",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["McJty"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
