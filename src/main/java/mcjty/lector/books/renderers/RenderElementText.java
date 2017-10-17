@@ -48,10 +48,10 @@ public class RenderElementText implements RenderElement {
         if (align == -1) {
             xx = x;
         } else if (align == 1) {
-            int w = 768 - x;
+            int w = 1024 - x;
             xx = (int) (x + w - font.getWidth(text) * scale);
         } else {
-            int w = 768 - x;
+            int w = 1024 - x;
             xx = (int) (x + (w - font.getWidth(text) * scale) / 2);
         }
         int yy;
