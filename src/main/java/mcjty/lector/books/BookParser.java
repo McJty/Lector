@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mcjty.lector.Lector;
 import mcjty.lector.books.elements.*;
+import mcjty.lector.books.parser.FormatParser;
+import mcjty.lector.books.parser.FormatToken;
+import mcjty.lector.books.parser.ParserException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -20,6 +23,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookParser {
 
@@ -37,6 +41,113 @@ public class BookParser {
     }
 
     private List<BookSection> parseSections(String name, InputStream inputstream) {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new InputStreamReader(inputstream, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            Lector.logger.log(Level.ERROR, "Error reading file: " + name);
+            return Collections.emptyList();
+        }
+
+        List<BookSection> sections = new ArrayList<>();
+
+        FormatParser parser = new FormatParser();
+        List<FormatToken> tokens;
+        try {
+            tokens = parser.parse(br.lines().collect(Collectors.joining("\n")));
+        } catch (ParserException e) {
+            Lector.logger.log(Level.ERROR, "Error parsing file: " + name, e);
+            return Collections.emptyList();
+        }
+
+        BookSection section = null;
+        boolean lastIsText = false;
+
+        for (FormatToken token : tokens) {
+            switch (token.getToken()) {
+                case TITLE:
+                    section = new BookSection("_TITLE_");
+                    sections.add(section);
+                    break;
+                case TOC:
+                    section = new BookSection("_TOC_");
+                    sections.add(section);
+                    break;
+                case SECTION:
+                    section = new BookSection(token.getValue());
+                    sections.add(section);
+                    break;
+                case TEXT:
+                    break;
+                case PARAGRAPH:
+                    section.addElement(new BookElementNewParagraph());
+                    lastIsText = false;
+                    break;
+                case PAGE:
+                    break;
+                case ITEM:
+                    break;
+                case IMG:
+                    break;
+            }
+/*
+            JsonElement textElement = object.get("text");
+            boolean lastIsText = false;
+            if (textElement != null) {
+                for (JsonElement textChild : textElement.getAsJsonArray()) {
+                    if ((!textChild.isJsonPrimitive()) || !textChild.getAsJsonPrimitive().isString()) {
+                        Lector.logger.log(Level.WARN, "File " + name + " has a problem in section " + section.getName());
+                        continue;
+                    }
+                    String string = textChild.getAsString();
+                    if (string.equals("#")) {
+                        section.addElement(new BookElementNewline());
+                        lastIsText = false;
+                    } else if (string.equals("#>")) {
+                        section.addElement(new BookElementNewline());
+                        section.addElement(new BookElementIndent());
+                        lastIsText = false;
+                    } else if (string.equals("##")) {
+                        section.addElement(new BookElementNewParagraph());
+                        lastIsText = false;
+                    } else if (string.equals("#-")) {
+                        section.addElement(new BookElementRuler());
+                        lastIsText = false;
+                    } else if (string.startsWith("#l")) {
+                        lastIsText = parseLink(section, string);
+                    } else if (string.startsWith("#i")) {
+                        lastIsText = parseItem(section, string);
+                    } else if (string.startsWith("#I")) {
+                        lastIsText = parseImage(section, string);
+                    } else if (string.startsWith("#:")) {
+                        lastIsText = parseFormattedText(section, lastIsText, string);
+                    } else {
+                        lastIsText = handleText(section, lastIsText, string, "");
+                    }
+                }
+            }
+
+            if (object.has("page")) {
+                sections.add(new BookSection(null));    // Next page
+            }
+        }
+*/
+        }
+        return sections;
+    }
+
+    private List<BookSection> parseSectionsJson(File file) {
+        FileInputStream inputstream;
+        try {
+            inputstream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            Lector.logger.log(Level.ERROR, "Error reading file: " + file.getName());
+            return Collections.emptyList();
+        }
+        return parseSectionsJson(file.getName(), inputstream);
+    }
+
+    private List<BookSection> parseSectionsJson(String name, InputStream inputstream) {
         BufferedReader br;
         try {
             br = new BufferedReader(new InputStreamReader(inputstream, "UTF-8"));
@@ -230,7 +341,7 @@ public class BookParser {
             Lector.logger.error("Cannot load manual '" + location.toString() + "'!", e);
             return Collections.emptyList();
         }
-        List<BookSection> sections = parseSections("builtin", inputstream);
+        List<BookSection> sections = parseSectionsJson("builtin", inputstream);
 
         List<BookPage> pages = new ArrayList<>();
 

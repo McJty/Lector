@@ -33,7 +33,7 @@ public class LectorManual extends CompatItem implements IBook {
 
     @Override
     public ResourceLocation getJson() {
-        return new ResourceLocation(Lector.MODID, "text/manual.txt");
+        return new ResourceLocation(Lector.MODID, "text/manual.json");
     }
 
     @SideOnly(Side.CLIENT)
