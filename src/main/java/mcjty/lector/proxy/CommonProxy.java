@@ -1,6 +1,7 @@
 package mcjty.lector.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import mcjty.lector.config.ConfigSetup;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
@@ -17,6 +18,7 @@ public abstract class CommonProxy {
     private Configuration mainConfig;
 
     public void preInit(FMLPreInitializationEvent e) {
+        ConfigSetup.preInit(e);
     }
 
     private void readMainConfig() {
@@ -26,6 +28,7 @@ public abstract class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
+        ConfigSetup.postInit();
     }
 
     public World getClientWorld() {

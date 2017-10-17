@@ -1,4 +1,4 @@
-package mcjty.Lector;
+package mcjty.lector;
 
 import mcjty.lector.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Lector.MODID, name = "Lector",
         dependencies =
@@ -27,12 +28,15 @@ public class Lector {
     @Mod.Instance(MODID)
     public static Lector instance;
 
+    public static Logger logger;
+
     /**
      * Run before anything else. Read your config, create blocks, items, etc, and
      * register them with the GameRegistry.
      */
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
+        logger = e.getModLog();
         this.proxy.preInit(e);
     }
 

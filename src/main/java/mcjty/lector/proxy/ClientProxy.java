@@ -1,9 +1,13 @@
 package mcjty.lector.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import mcjty.lector.Lector;
+import mcjty.lector.font.FontLoader;
+import mcjty.lector.font.TrueTypeFont;
 import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,6 +17,10 @@ import java.util.concurrent.Callable;
 
 public class ClientProxy extends CommonProxy {
 
+    public static TrueTypeFont font;
+    public static TrueTypeFont font_bold;
+    public static TrueTypeFont font_italic;
+
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
@@ -21,6 +29,13 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e) {
         super.init(e);
+
+        font = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu.ttf"), 64, false,
+                new char[] { '\u2022', '\u2014' });
+        font_bold = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_bold.ttf"), 64, false,
+                new char[] { '\u2022', '\u2014' });
+        font_italic = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_italic.ttf"), 64, false,
+                new char[] { '\u2022', '\u2014' });
     }
 
     @Override
