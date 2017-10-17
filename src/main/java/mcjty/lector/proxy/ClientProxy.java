@@ -4,6 +4,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import mcjty.lector.Lector;
 import mcjty.lector.font.FontLoader;
 import mcjty.lector.font.TrueTypeFont;
+import mcjty.lector.items.ModItems;
+import mcjty.lector.sound.SoundController;
 import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +26,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
+        ModItems.initModels();
+        SoundController.init();
     }
 
     @Override

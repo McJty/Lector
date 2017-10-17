@@ -21,7 +21,7 @@ import java.util.List;
 
 public class GuiManual extends GuiScreen {
 
-    private static final int WIDTH = 200;
+    private static final int WIDTH = 256;
     private static final int HEIGHT = 220;
     private int guiLeft;
     private int guiTop;
@@ -49,7 +49,7 @@ public class GuiManual extends GuiScreen {
         if (ItemStackTools.isValid(book) && book.getItem() instanceof IBook) {
             json = ((IBook) book.getItem()).getJson();
             BookParser parser = new BookParser();
-            pages = parser.parse(json, 768, 900);
+            pages = parser.parse(json, 980, 900);
             pageNumber = 0;
             result = null;
         } else {

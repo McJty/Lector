@@ -227,7 +227,8 @@ public class BookParser {
         try {
             inputstream = Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Lector.logger.error("Cannot load manual '" + location.toString() + "'!", e);
+            return Collections.emptyList();
         }
         List<BookSection> sections = parseSections("builtin", inputstream);
 

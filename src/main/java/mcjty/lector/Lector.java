@@ -1,6 +1,11 @@
 package mcjty.lector;
 
+import mcjty.lector.apiimpl.LectorApi;
+import mcjty.lector.items.ModItems;
 import mcjty.lector.proxy.CommonProxy;
+import mcjty.lib.compat.CompatCreativeTabs;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,6 +34,9 @@ public class Lector {
     public static Lector instance;
 
     public static Logger logger;
+    public static CreativeTabs creativeTab;
+
+    public static LectorApi api = new LectorApi();
 
     /**
      * Run before anything else. Read your config, create blocks, items, etc, and
@@ -37,6 +45,12 @@ public class Lector {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
         logger = e.getModLog();
+        creativeTab = new CompatCreativeTabs("lector") {
+            @Override
+            protected Item getItem() {
+                return ModItems.manual;
+            }
+        };
         this.proxy.preInit(e);
     }
 
