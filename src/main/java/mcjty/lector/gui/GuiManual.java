@@ -23,6 +23,10 @@ public class GuiManual extends GuiScreen {
 
     private static final int WIDTH = 256;
     private static final int HEIGHT = 220;
+
+    public static final int WIDTH_FACTOR = 1024;
+    public static final int HEIGHT_FACTOR = 900;
+
     private int guiLeft;
     private int guiTop;
 
@@ -33,6 +37,7 @@ public class GuiManual extends GuiScreen {
 
     private static final ResourceLocation background = new ResourceLocation(Lector.MODID, "textures/gui/manual_paper.png");
     private static final ResourceLocation backgroundFront = new ResourceLocation(Lector.MODID, "textures/gui/manual_front.png");
+
 
     public GuiManual() {
     }
@@ -49,7 +54,7 @@ public class GuiManual extends GuiScreen {
         if (ItemStackTools.isValid(book) && book.getItem() instanceof IBook) {
             json = ((IBook) book.getItem()).getJson();
             BookParser parser = new BookParser();
-            pages = parser.parse(json, 980, 900);
+            pages = parser.parse(json, WIDTH_FACTOR, HEIGHT_FACTOR);
             pageNumber = 0;
             result = null;
         } else {

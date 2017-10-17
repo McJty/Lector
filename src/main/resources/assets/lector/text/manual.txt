@@ -12,8 +12,8 @@
 {---}
 {section item=lector:manual Using This Manual}
 {t size=2 Using This Manual}{p}
-{t There are several ways that you can use this manual.}
-{t You can use it simply by right clicking this book item (}
+{t There are several ways that you can use this manual.
+You can use it simply by right clicking this book item (}
 {item lector:manual}
 {t ) and viewing it in a regular GUI}
 {---}

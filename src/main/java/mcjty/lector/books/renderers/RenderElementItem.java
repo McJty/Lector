@@ -1,5 +1,6 @@
 package mcjty.lector.books.renderers;
 
+import mcjty.lector.gui.GuiManual;
 import mcjty.lib.tools.ItemStackTools;
 import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
@@ -71,8 +72,8 @@ public class RenderElementItem implements RenderElement {
 
     @Override
     public void render2(int dy, float ix, float iy) {
-        ix = (float) (ix * 768 * 1.25 - 105);
-        iy = (float) (iy * 1024 * 1.1 - 65);
+        ix = (float) (ix * 1024 * 1.2 - 95);
+        iy = (float) (iy * 1024 * 1.08 - 55);
         if (ix >= x && ix <= x+w && iy >= (y + dy) && iy <= y+dy+h) {
             RenderHelper.enableGUIStandardItemLighting();
             GlStateManager.pushMatrix();
