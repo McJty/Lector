@@ -49,12 +49,12 @@ public class BookRenderHelper {
 
         GlStateManager.translate(guiLeft + 20, guiTop + 25, 1F);
 
-        GlStateManager.scale(0.2f, 0.2f, 1.0f);
+        GlStateManager.scale(0.1f, 0.1f, 1.0f);
 
         String result = renderText(pages.get(index), ix, iy);
 
         if (index > 0) {
-            ClientProxy.font.drawString(700.0f, -400.0f, index + "/" + (pages.size() - 1), 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f);
+            ClientProxy.font.drawString(2000, -1350, index + "/" + (pages.size() - 1), 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         GlStateManager.popMatrix();

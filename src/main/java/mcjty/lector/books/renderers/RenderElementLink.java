@@ -21,8 +21,8 @@ public class RenderElementLink extends RenderElementText {
     public String render(int dy, float ix, float iy) {
         int w = (int) (fmt.getFont().getWidth(text) * fmt.getScale());
         int h = (int) (fmt.getFont().getHeight() * fmt.getScale());
-        ix = (float) (ix * 1024 * 1.2 - 95);
-        iy = (float) (iy * 1024 * 1.08 - 55);
+        ix = (float) (ix * 2048 * 1.2 - 95);
+        iy = (float) (iy * 2048 * 1.08 - 55);
 
         if (ix >= x && ix <= x+w && iy >= y && iy <= y+h) {
             renderText(dy, sr, sg, sb);

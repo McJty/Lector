@@ -34,11 +34,11 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent e) {
         super.init(e);
 
-        font = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu.ttf"), 64, false,
+        font = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu.ttf"), 128, true,
                 new char[] { '\u2022', '\u2014' });
-        font_bold = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_bold.ttf"), 64, false,
+        font_bold = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_bold.ttf"), 128, true,
                 new char[] { '\u2022', '\u2014' });
-        font_italic = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_italic.ttf"), 64, false,
+        font_italic = FontLoader.createFont(new ResourceLocation(Lector.MODID, "fonts/ubuntu_italic.ttf"), 128, true,
                 new char[] { '\u2022', '\u2014' });
     }
 

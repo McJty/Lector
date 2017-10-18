@@ -24,8 +24,8 @@ public class GuiManual extends GuiScreen {
     private static final int WIDTH = 256;
     private static final int HEIGHT = 220;
 
-    public static final int WIDTH_FACTOR = 1024;
-    public static final int HEIGHT_FACTOR = 900;
+    public static final int WIDTH_FACTOR = 2048;
+    public static final int HEIGHT_FACTOR = 2048;
 
     private int guiLeft;
     private int guiTop;

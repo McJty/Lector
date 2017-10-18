@@ -58,6 +58,7 @@ public class RenderElementItem implements RenderElement {
         GlStateManager.enableDepth();
 
         GlStateManager.pushMatrix();
+
         GlStateManager.translate(0, scale * 25 - 25, -150);
 
         renderSlot(item, x, y + dy);
@@ -72,8 +73,8 @@ public class RenderElementItem implements RenderElement {
 
     @Override
     public void render2(int dy, float ix, float iy) {
-        ix = (float) (ix * 1024 * 1.2 - 95);
-        iy = (float) (iy * 1024 * 1.08 - 55);
+        ix = (float) (ix * 2048 * 1.2 - 125);
+        iy = (float) (iy * 2048 * 1.08 - 105);
         if (ix >= x && ix <= x+w && iy >= (y + dy) && iy <= y+dy+h) {
             RenderHelper.enableGUIStandardItemLighting();
             GlStateManager.pushMatrix();
@@ -124,6 +125,7 @@ public class RenderElementItem implements RenderElement {
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.setupGuiTransform(x, y, bakedmodel.isGui3d());
+        GlStateManager.scale(1.6, 1.6, 1);
         bakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(bakedmodel, ItemCameraTransforms.TransformType.GUI, false);
         Minecraft.getMinecraft().getRenderItem().renderItem(stack, bakedmodel);
         GlStateManager.disableAlpha();
